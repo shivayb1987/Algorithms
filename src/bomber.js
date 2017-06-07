@@ -16,16 +16,15 @@ or more continuous occurrence of same characters in the string.
 
 var assert = require('assert');
 
-function bomber(str, recursive = false) {
+function bomber(str) {
 	if (str.length < 3) {
 		return str;
 	}
-
 	let char = str.charAt(0);
-
 	let count = 1;
 	let prevCount = 0;
 	let bombed = str;
+	
 	for (let i=1; i<str.length; i++) {
 		if (char === str.charAt(i)) {
 			count++;
@@ -36,15 +35,18 @@ function bomber(str, recursive = false) {
 				prevCount = count;
 				bombed = bomber(bombed, recursive);
 			}
-			if (i === str.length-1) {
+			if (i === str.length - 1) {
 				return bombed;
 			}
-
 			count = 1;
+		}
+
+		if (count >= 3) {
+			bombed = bombed.substring(0, str.length-count);
 		}
 	}
 	return bombed;
 }
 
-assert.ok(bomber("aaabcccdee"), "bdee");
-assert.ok(bomber("abcdeeeeddcbfgf"), "abccbfgf");
+assert.equal(bomber("aaabcccdee"), "bdee");
+assert.equal(bomber("abcdeeeeddcbfgfaaaa"), "abccbfgf");
