@@ -3,7 +3,7 @@ export function merge (arr, low, middle, high) {
 	let queue2 = arr.slice(middle + 1);
 
 	let i = low;
-	if (!!queue1.length && !!queue2.length) {
+	while (!!queue1.length && !!queue2.length) {
 		if (queue1[0] <= queue2[0]) {
 			arr[i] = queue1.shift();
 		} else {
