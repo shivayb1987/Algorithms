@@ -1,6 +1,6 @@
 export function merge (arr, low, middle, high) {
 	let queue1 = arr.slice(low, middle + 1);
-	let queue2 = arr.slice(middle + 1);
+	let queue2 = arr.slice(middle + 1, high + 1);
 
 	let i = low;
 	while (!!queue1.length && !!queue2.length) {
